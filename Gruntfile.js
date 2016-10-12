@@ -7,8 +7,8 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['/public/**/*.js'],
-        dest: '/public/dist/built.js',
+        src: ['public/**/*.js'],
+        dest: 'public/dist/built.js',
       }
     },
 
@@ -27,11 +27,17 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: ['/public/dist/built.js'],
+    uglify: {
+      my_target: {
+        files: {
+          'public/dist/built.min.js': ['public/dist/built.js']
+        }
+      }
+    },
 
     eslint: {
       target: [
-        '/public/*.js'
+        'public/**/*.js'
       ]
     },
 
@@ -83,7 +89,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'concat', 'uglify'
+    'concat', 
+    'uglify',
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -95,7 +102,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    'build', 'server-dev'
+    'test', 'eslint', 'build', 'server-dev'
   ]);
 
 
