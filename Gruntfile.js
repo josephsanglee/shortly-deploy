@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['/public/**/*.js'],
-        dest: 'dist/built.js',
+        dest: '/public/dist/built.js',
       }
     },
 
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: ['dist/built.js'],
+    uglify: ['/public/dist/built.js'],
 
     eslint: {
       target: [
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    'server-dev'
+    'build', 'server-dev'
   ]);
 
 
