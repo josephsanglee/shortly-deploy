@@ -69,11 +69,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-        command: [
-          'git add .',
-          'git commit -m "' + grunt.template.today() + '"',
-          'git push live master'
-        ].join('&&')
+        command: 'git push live master'
       }
     },
   });
@@ -100,7 +96,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [ 'concat', 'uglify']);
 
   grunt.registerTask('upload', function(n) {
-    console.log(grunt.option('prod'));
     if (grunt.option('prod')) {
       grunt.task.run(['shell:prodServer']);
     } else {
@@ -111,6 +106,4 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', [
     'test', 'eslint', 'build', 'upload'
   ]);
-
-
 };
